@@ -6,9 +6,11 @@
 # 扩展：
 1. 需要安装扩展
   - https://github.com/web3p/secp256k1
-  
+
 # 运行：
 1. 进入项目根目录
 2. 执行composer install，安装依赖
 3. php demo.php，至此就结束了，最后会输出一个dna，可以直接去链上查询（查询api参考官方提供文档）
-    
+
+
+[详细文档](http://yuanbenlian.mydoc.io/)
