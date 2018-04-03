@@ -1,0 +1,17 @@
+{
+    "minimum-stability": "dev",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "olegabr/keccak": "^1.0",
+        "symfony/cache": "^3.4",
+        "web3p/secp256k1": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "library\\": "library/"
+        },
+        "files": [
+            "helpers.php"
+        ]
+    }
+}
