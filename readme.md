@@ -5,7 +5,7 @@
 
 # 扩展：
 1. 需要安装扩展
-  - https://github.com/Bit-Wasp/secp256k1-php
+  - https://github.com/web3p/secp256k1
   
 # 运行：
 1. 进入项目根目录
