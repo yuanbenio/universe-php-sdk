@@ -16,7 +16,7 @@
 > git clone https://github.com/yuanbenio/universe-php-sdk.git & composer install
 
 * composer 安装
-> composer require yuanben/universe-php-sdk
+> composer require xiongchao/universe-php-sdk
    
 ### SDK使用
 
