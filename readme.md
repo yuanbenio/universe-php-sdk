@@ -6,6 +6,10 @@
 
 ### 安装
 
+> 请在Linux系统下运行
+
+> PHP Version >= 7.0
+
 > 本包依赖于secp256k1库,安装secp256k1库请参考[secp256k1-php](https://github.com/Bit-Wasp/secp256k1-php)进行安装
 
 * git 安装
