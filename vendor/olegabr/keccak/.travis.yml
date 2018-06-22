@@ -9,6 +9,8 @@ php:
 
 matrix:
   fast_finish: true
+  allow_failures:
+    - php: nightly
 
 install:
         #  - if [[ "$TRAVIS_PHP_VERSION" != "nightly" ]]; then phpenv config-rm xdebug.ini; fi

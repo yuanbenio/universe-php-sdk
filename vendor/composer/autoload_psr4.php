@@ -6,18 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'library\\' => array($baseDir . '/library'),
     'kornrunner\\' => array($vendorDir . '/olegabr/keccak/src'),
-    'Web3p\\Secp256k1\\' => array($vendorDir . '/web3p/secp256k1/src'),
-    'Symfony\\Polyfill\\Apcu\\' => array($vendorDir . '/symfony/polyfill-apcu'),
-    'Symfony\\Component\\Cache\\' => array($vendorDir . '/symfony/cache'),
+    'YuanBen\\YuanBenLian\\' => array($baseDir . '/src'),
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
-    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
-    'Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
-    'Mdanter\\Ecc\\' => array($vendorDir . '/mdanter/ecc/src'),
+    'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
+    'Illuminate\\Contracts\\' => array($vendorDir . '/illuminate/contracts'),
+    'Illuminate\\Container\\' => array($vendorDir . '/illuminate/container'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
     'GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),
     'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
-    'FG\\' => array($vendorDir . '/fgrosse/phpasn1/lib'),
 );
