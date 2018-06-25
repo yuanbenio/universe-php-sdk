@@ -4,85 +4,61 @@ namespace YuanBen\YuanBenLian;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use Psr\Http\Message\ResponseInterface;
 
 class BlockRequest
 {
     const METADATA_URL = "/v1/metadata";
     const BLOCK_HASH_URL = "/v1/block_hash";
     private $client;
+    /**
+     * @var ResponseInterface
+     */
+    private $response;
 
-
-    public function __construct()
+    public function __construct($base_uri)
     {
         //TODO 根据环境修改请求地址 可设置成配置
-        $url = "https://testnet.yuanbenlian.com";
         $this->client = new Client(
-            ["base_uri" => $url]
+            ["base_uri" => $base_uri]
         );
     }
 
     /**
      * @param $metadataJson
-     * @return array|bool
+     * @throws ClientException
+     * @return ResponseInterface
      */
-    public function _createMetadata($metadataJson)
+    public function createMetadata($metadataJson)
     {
-        try {
-            $response = $this->client->post(self::METADATA_URL, [
-                'headers' => [
-                    'Content-Type' => 'application/json',
-                ],
-                'body' => $metadataJson
-            ]);
-        } catch (ClientException $e) {
-            logger($e->getMessage());
-            return false;
-        }
-        if ($response->getStatusCode() != 200) {
-            logger($response->getBody()->getContents());
-            return false;
-        }
-        $content = $response->getBody()->getContents();
-        $data = json_decode($content, true);
-        return $data;
+        $this->response = $this->client->post(self::METADATA_URL, [
+            'headers' => [
+                'Content-Type' => 'application/json',
+            ],
+            'body' => $metadataJson
+        ]);
+        return $this->response;
     }
 
     /**
      * @param $dna
-     * @return array|bool
+     * @throws ClientException
+     * @return ResponseInterface
      */
     public function searchMetaData($dna)
     {
-        $response = $this->client->get(self::METADATA_URL . "/$dna");
-        if ($response->getStatusCode() != 200) {
-            logger($response->getBody()->getContents());
-            return false;
-        }
-        $content = $response->getBody()->getContents();
-        $data = json_decode($content, true);
-        return $data;
+        $this->response = $this->client->get(self::METADATA_URL . "/$dna");
+        return $this->response;
     }
 
     /**
-     * 获取block msg
-     * @author mingwang
-     * @date 2018.3.30
-     * @return array|bool
+     * @throws ClientException
+     * @return ResponseInterface
      */
     public function getBlockMsg()
     {
-        $response = $this->client->get(self::BLOCK_HASH_URL);
-        if ($response->getStatusCode() != 200) {
-            logger($response->getBody()->getContents());
-            return false;
-        }
-        $content = $response->getBody()->getContents();
-        $contentArr = json_decode($content, true);
-        if (!isset($contentArr['data'])) {
-            logger('#信息#: 获取block hash失败,' . $contentArr["msg"]);
-            return false;
-        }
-        return $contentArr['data'];
+        $this->response = $this->client->get(self::BLOCK_HASH_URL);
+        return $this->response;
     }
 
 }

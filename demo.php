@@ -5,26 +5,22 @@
  * 当metadata中的字段数据为空时请在请求时过滤掉,原本链服务端会对空的字段值进行移除,会导致签名验证失败
  */
 
-
-
-
 require_once __DIR__ . "/vendor/autoload.php";
 
-testImage();
+$url = "https://testnet.yuanbenlian.com";
 
-function testArticle()
+testImage($url);
+
+function testArticle($url)
 {
     $handle = app(\YuanBen\YuanBenLian\BlockHandle::class);
     $privateKey = $handle->generatePrivateKey();
     $contentHash = $handle->getContentHash("测试文章");
-    $request = app(\YuanBen\YuanBenLian\BlockRequest::class);
-    $data = $request->getBlockMsg();
-    if (!$data) {
-        // TODO
-        logger("获取最新区块高度失败");
-    }
-    $blockHash = $data['latest_block_hash'];
-    $blockHeight = (string)$data['latest_block_height'];
+    $request = app(\YuanBen\YuanBenLian\BlockRequest::class, ["base_uri" => $url]);
+    $data = $request->getBlockMsg()->getBody()->getContents();
+    $block = json_decode($data,true);
+    $blockHash = $block['data']['latest_block_hash'];
+    $blockHeight = (string)$block['data']['latest_block_height'];
     $metadataArr = [
         'language' => 'zh-CN',
         'type' => 'article',
@@ -48,24 +44,26 @@ function testArticle()
     $metadataArr['signature'] = $sign;
     $dna = $handle->generateDNA($sign);
     $metadataArr['dna'] = $dna;
+    $metadataJson = json_encode($metadataArr, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     // TODO 可自定义方法对必须字段进行校验
-    $createMetadataRes = $request->_createMetadata(json_encode($metadataArr, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-    logger($createMetadataRes);
+    try {
+        $createMetadataRes = $request->createMetadata($metadataJson)->getBody()->getContents();
+        logger($createMetadataRes);
+    } catch (\GuzzleHttp\Exception\ClientException $e) {
+        logger($e->getMessage());
+    }
 }
 
-function testImage()
+function testImage($url)
 {
     $handle = app(\YuanBen\YuanBenLian\BlockHandle::class);
     $privateKey = $handle->generatePrivateKey();
     $contentHash = $handle->getContentHash(file_get_contents(__DIR__ . "/images/user1.png"));
-    $request = app(\YuanBen\YuanBenLian\BlockRequest::class);
-    $data = $request->getBlockMsg();
-    if (!$data) {
-        // TODO
-        logger("获取最新区块高度失败");
-    }
-    $blockHash = $data['latest_block_hash'];
-    $blockHeight = (string)$data['latest_block_height'];
+    $request = app(\YuanBen\YuanBenLian\BlockRequest::class, ["base_uri" => $url]);
+    $data = $request->getBlockMsg()->getBody()->getContents();
+    $block = json_decode($data,true);
+    $blockHash = $block['data']['latest_block_hash'];
+    $blockHeight = (string)$block['data']['latest_block_height'];
     $metadataArr = [
         'language' => 'zh-CN',
         'type' => 'image',
@@ -93,9 +91,14 @@ function testImage()
     $metadataArr['signature'] = $sign;
     $dna = $handle->generateDNA($sign);
     $metadataArr['dna'] = $dna;
+    $metadataJson = json_encode($metadataArr, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     // TODO 可自定义方法对必须字段进行校验
-    $createMetadataRes = $request->_createMetadata(json_encode($metadataArr, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-    logger($createMetadataRes);
+    try {
+        $createMetadataRes = $request->createMetadata($metadataJson)->getBody()->getContents();
+        logger($createMetadataRes);
+    } catch (\GuzzleHttp\Exception\ClientException $e) {
+        logger($e->getMessage());
+    }
 }
 
 

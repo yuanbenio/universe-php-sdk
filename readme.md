@@ -23,23 +23,20 @@
 #### 1.请求上链
 
 * 以接入图片类型示例
+
 ```php
 require_once __DIR__ . "/vendor/autoload.php";
-
 $src = __DIR__ . "/images/user1.png";
-
+$url = "https://testnet.yuanbenlian.com";  // 原本链测试线地址
 $handle = app(\YuanBen\YuanBenLian\BlockHandle::class);
-$request = app(\YuanBen\YuanBenLian\BlockRequest::class);
+$request = app(\YuanBen\YuanBenLian\BlockRequest::class, ["base_uri" => $url]);
 $privateKey = $handle->generatePrivateKey();
 $contentHash = $handle->getContentHash(file_get_contents($src));
-$data = $request->getBlockMsg();
-if (!$data) {
-    // TODO
-    logger("获取最新区块高度失败");
-}
+$data = $request->getBlockMsg()->getBody()->getContents();
+$block = json_decode($data,true);
+$blockHash = $block['data']['latest_block_hash'];
+$blockHeight = (string)$block['data']['latest_block_height']; // 原本链要求所有metadata的内容均为string类型
 // 拼接 metadata
-$blockHash = $data['latest_block_hash'];
-$blockHeight = (string)$data['latest_block_height'];  // 原本链要求所有metadata的内容均为string类型
 $metadataArr = [
     'language' => 'zh-CN',
     'type' => 'image',
@@ -69,16 +66,19 @@ $sign = $handle->getSign($privateKey, $metadataArr);
 $metadataArr['signature'] = $sign;
 $dna = $handle->generateDNA($sign);
 $metadataArr['dna'] = $dna;
-// TODO 可自定义方法对必须字段进行校验
-$createMetadataRes = $request->_createMetadata(json_encode($metadataArr, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-logger($createMetadataRes);
+$metadataJson = json_encode($metadataArr, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    // TODO 可自定义方法对必须字段进行校验
+try {
+     $createMetadataRes = $request->createMetadata($metadataJson)->getBody()->getContents();
+     logger($createMetadataRes);
+} catch (\GuzzleHttp\Exception\ClientException $e) {
+     logger($e->getMessage());
+}
+```
 
-```    
 #### 根据dna信息查询元数据
 
 ```php
-$request = app(\YuanBen\YuanBenLian\BlockRequest::class);
-$metadata=$request->searchMetaData($dna);
+$request = app(\YuanBen\YuanBenLian\BlockRequest::class,["base_uri"=>$url]);
+$metadata=$request->searchMetaData($dna)->getBody()->getContents();
 ```
-
-
