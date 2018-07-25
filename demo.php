@@ -13,10 +13,10 @@ testImage($url);
 
 function testArticle($url)
 {
-    $handle = app(\YuanBen\BlockHandle::class);
+    $handle = new \YuanBen\BlockHandle();
     $privateKey = $handle->generatePrivateKey();
     $contentHash = $handle->getContentHash("测试文章");
-    $request = app(\YuanBen\BlockRequest::class, ["base_uri" => $url]);
+    $request = new \YuanBen\BlockRequest(["base_uri" => $url]);
     $data = $request->getBlockMsg()->getBody()->getContents();
     $block = json_decode($data,true);
     $blockHash = $block['data']['latest_block_hash'];
@@ -56,10 +56,10 @@ function testArticle($url)
 
 function testImage($url)
 {
-    $handle = app(\YuanBen\BlockHandle::class);
+    $handle = new \YuanBen\BlockHandle();
     $privateKey = $handle->generatePrivateKey();
     $contentHash = $handle->getContentHash(file_get_contents(__DIR__ . "/images/user1.png"));
-    $request = app(\YuanBen\BlockRequest::class, ["base_uri" => $url]);
+    $request = new \YuanBen\BlockRequest(["base_uri" => $url]);
     $data = $request->getBlockMsg()->getBody()->getContents();
     $block = json_decode($data,true);
     $blockHash = $block['data']['latest_block_hash'];
