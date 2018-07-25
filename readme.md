@@ -10,7 +10,8 @@
 
 > PHP Version >= 7.0
 
-> 本包依赖于secp256k1库,安装secp256k1库请参考[secp256k1-php](https://github.com/Bit-Wasp/secp256k1-php)进行安装
+* ext-secp256k1: [https://github.com/Bit-Wasp/secp256k1-php](https://github.com/Bit-Wasp/secp256k1-php)
+* ext-keccak: [https://github.com/archwisp/php-keccak-hash](https://github.com/archwisp/php-keccak-hash)
 
 * git 安装
 > git clone https://github.com/yuanbenio/universe-php-sdk.git & composer install

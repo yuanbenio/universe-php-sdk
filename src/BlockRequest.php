@@ -1,6 +1,6 @@
 <?php
 
-namespace YuanBen\YuanBenLian;
+namespace YuanBen;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;

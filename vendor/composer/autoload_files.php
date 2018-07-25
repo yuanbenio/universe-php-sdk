@@ -9,5 +9,5 @@ return array(
     'c964ee0ededf28c96ebd9db5099ef910' => $vendorDir . '/guzzlehttp/promises/src/functions_include.php',
     'a0edc8309cc5e1d60e3047b5df6b7052' => $vendorDir . '/guzzlehttp/psr7/src/functions_include.php',
     '37a3dc5111fe8f707ab4c132ef1dbc62' => $vendorDir . '/guzzlehttp/guzzle/src/functions_include.php',
-    'f0ae0fe75e692a611e9a9f4b301d7a06' => $baseDir . '/helpers.php',
+    '516c4c22ab391a508151bf5d31fba256' => $baseDir . '/helpers.php',
 );

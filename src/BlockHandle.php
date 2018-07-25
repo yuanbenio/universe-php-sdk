@@ -1,8 +1,6 @@
 <?php
 
-namespace YuanBen\YuanBenLian;
-
-use kornrunner\Keccak;
+namespace YuanBen;
 
 class BlockHandle
 {

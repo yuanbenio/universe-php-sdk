@@ -12,13 +12,14 @@
   ],
   "require":{
       "php": ">=7.0",
+      "ext-secp256k1": ">=0.1.0",
+      "ext-keccak": "~0.2",
       "illuminate/container":"v5.5.0",
-      "guzzlehttp/guzzle": "~6.0",
-      "olegabr/keccak": "^1.0.3"
+      "guzzlehttp/guzzle": "~6.0"
   },
   "autoload": {
     "psr-4": {
-      "YuanBen\\YuanBenLian\\": "src/"
+      "YuanBen\\": "src/"
     },
     "files": [
       "helpers.php"

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "71cab492a03251242904f4a4c69bff4f",
+    "content-hash": "308e9c767a254066d7808ef2a992abbb",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -306,61 +306,6 @@
             "time": "2018-03-20T15:34:35+00:00"
         },
         {
-            "name": "olegabr/keccak",
-            "version": "1.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/olegabr/php-keccak.git",
-                "reference": "280978604726639f933326f3be6aaa2eb491398f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/olegabr/php-keccak/zipball/280978604726639f933326f3be6aaa2eb491398f",
-                "reference": "280978604726639f933326f3be6aaa2eb491398f",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "php": ">=5.6"
-            },
-            "require-dev": {
-                "php": ">=5.6",
-                "phpunit/phpunit": "5.7.27|6.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "kornrunner\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Boris Momcilovic",
-                    "homepage": "https://github.com/kornrunner/php-keccak"
-                },
-                {
-                    "name": "Oleg Abrosimov",
-                    "homepage": "https://github.com/olegabr/php-keccak"
-                }
-            ],
-            "description": "Pure PHP implementation of Keccak with PHP 5.6+ support",
-            "keywords": [
-                "keccak",
-                "sha-3"
-            ],
-            "time": "2018-06-14T11:57:17+00:00"
-        },
-        {
             "name": "psr/container",
             "version": "1.0.0",
             "source": {
@@ -533,7 +478,9 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.0"
+        "php": ">=7.0",
+        "ext-secp256k1": ">=0.1.0",
+        "ext-keccak": "~0.2"
     },
     "platform-dev": []
 }

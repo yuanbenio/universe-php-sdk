@@ -309,63 +309,6 @@
         "homepage": "https://laravel.com"
     },
     {
-        "name": "olegabr/keccak",
-        "version": "1.0.4",
-        "version_normalized": "1.0.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/olegabr/php-keccak.git",
-            "reference": "280978604726639f933326f3be6aaa2eb491398f"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/olegabr/php-keccak/zipball/280978604726639f933326f3be6aaa2eb491398f",
-            "reference": "280978604726639f933326f3be6aaa2eb491398f",
-            "shasum": "",
-            "mirrors": [
-                {
-                    "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
-                    "preferred": true
-                }
-            ]
-        },
-        "require": {
-            "ext-mbstring": "*",
-            "php": ">=5.6"
-        },
-        "require-dev": {
-            "php": ">=5.6",
-            "phpunit/phpunit": "5.7.27|6.5"
-        },
-        "time": "2018-06-14T11:57:17+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "kornrunner\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Boris Momcilovic",
-                "homepage": "https://github.com/kornrunner/php-keccak"
-            },
-            {
-                "name": "Oleg Abrosimov",
-                "homepage": "https://github.com/olegabr/php-keccak"
-            }
-        ],
-        "description": "Pure PHP implementation of Keccak with PHP 5.6+ support",
-        "keywords": [
-            "keccak",
-            "sha-3"
-        ]
-    },
-    {
         "name": "psr/container",
         "version": "1.0.0",
         "version_normalized": "1.0.0.0",
