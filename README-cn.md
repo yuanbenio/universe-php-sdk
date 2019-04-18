@@ -38,7 +38,7 @@
 
 #### 从composer
 
-* composer require yuanben/universe-php-sdk
+* composer require yuanbenio/universe-php-sdk
 
 ## 原本链 API 返回码
 

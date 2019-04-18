@@ -38,7 +38,7 @@
 
 #### from composer
 
-* composer require yuanben/universe-php-sdk
+* composer require yuanbenio/universe-php-sdk
 
 ## YuanBenLian API return code
 
