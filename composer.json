@@ -1,27 +1,37 @@
 {
-  "name": "xiongchao/universe-php-sdk",
+  "name": "yuanben/universe-php-sdk",
   "description": "Ethereum secp256k1 library in PHP",
-  "keywords": ["bitwasp", "bitcoin", "php", "secp256k1", "ecc", "ecdsa", "cryptocurrency", "extension"],
+  "keywords": [
+    "bitwasp",
+    "bitcoin",
+    "php",
+    "secp256k1",
+    "ecc",
+    "ecdsa",
+    "cryptocurrency",
+    "node",
+    "ybl",
+    "yuanbenlian"
+  ],
   "type": "library",
   "license": "MIT",
   "authors": [
     {
-      "name": "xiongchao",
-      "email": "xiongchao@yuanben.org"
+      "name": "yuanben",
+      "email": "developer@yuanben.org"
     }
   ],
-  "require":{
-      "php": ">=7.0",
-      "ext-secp256k1": ">=0.1.0",
-      "ext-keccak": "~0.2",
-      "guzzlehttp/guzzle": "~6.0"
+  "require": {
+    "php-64bit": ">=7.0",
+    "ext-gmp": "*",
+    "ext-secp256k1": "^0.1.0",
+    "ext-keccak": "~0.2",
+    "guzzlehttp/guzzle": "~6.0",
+    "bitwasp/buffertools": "^0.5.0"
   },
   "autoload": {
     "psr-4": {
-      "YuanBen\\": "src/"
-    },
-    "files": [
-      "helpers.php"
-    ]
+      "YBL\\": "src/"
+    }
   }
 }

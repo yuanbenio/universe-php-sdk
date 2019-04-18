@@ -1,6 +1,6 @@
 <?php
 
-namespace YuanBen;
+namespace YBL\Kernel\Crypto;
 
 class Keccak
 {

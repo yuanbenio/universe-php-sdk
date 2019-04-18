@@ -1,0 +1,30 @@
+<?php
+
+namespace YBL\Kernel\Types;
+
+use Exception;
+use YBL\Kernel\Support\Utils;
+
+class Byte extends TypeAbstract
+{
+    /**
+     * @param string $string
+     * @return Byte
+     * @throws Exception
+     */
+    public static function init($string = ''): Byte
+    {
+        return new static(new Buffer($string));
+    }
+
+    /**
+     * @param string $hex
+     * @return Byte
+     * @throws Exception
+     */
+    public static function initWithHex($hex): Byte
+    {
+        $hex = Utils::removeHexPrefix($hex);
+        return new static(Buffer::hex($hex));
+    }
+}
