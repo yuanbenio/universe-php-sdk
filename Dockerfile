@@ -1,5 +1,10 @@
 FROM php:7.0.11-cli
 
+# change sources
+COPY sources.list sources.list
+RUN rm -rf /etc/apt/sources.list \
+	&& cp sources.list /etc/apt/sources.list
+
 # gd
 RUN apt-get update && apt-get install --no-install-recommends -y \
 	libpng-dev \
@@ -17,7 +22,7 @@ RUN docker-php-ext-install gd
 
 # zip gmp bcmath pdo_mysql zip gmp mysqli
 
-RUN apt-get install --no-install-recommends -y \
+RUN apt-get install --no-install-recommends --fix-missing -y \
 	libzip-dev \
 	libgmp-dev
 
@@ -33,12 +38,15 @@ RUN docker-php-ext-install -j$(nproc) bcmath \
 
 # install secp256k1 && php secp256k1 ext
 
-RUN apt-get install -y autoconf \
+RUN apt-get update && apt-get install --no-install-recommends --fix-missing -y autoconf \
 	git  \
 	automake \
 	g++ \
 	make \
 	libtool
+
+RUN apt-cache show apt-get -t=jessie install libcurl3-gnutls \
+	&& apt-get install --force-yes -y libcurl3-gnutls=7.38.0-4+deb8u11
 
 RUN git clone https://github.com/bitcoin-core/secp256k1.git \
     && ( \
@@ -52,8 +60,7 @@ RUN git clone https://github.com/bitcoin-core/secp256k1.git \
        ) \
     && rm -rf secp256k1
 
-RUN wget https://github.com/Bit-Wasp/secp256k1-php/archive/v0.1.3.tar.gz \
-    && mv secp256k1-php-0.1.3.tar.gz secp256k1-php.tar.gz
+COPY secp256k1-php-0.1.3.tar.gz secp256k1-php.tar.gz
 
 RUN mkdir -p secp256k1-php \
     && tar -xf secp256k1-php.tar.gz -C secp256k1-php --strip-components=1 \
@@ -90,4 +97,3 @@ RUN \
 RUN apt-get purge --auto-remove -y g++ git \
 	&& apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
