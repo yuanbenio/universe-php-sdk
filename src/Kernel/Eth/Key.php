@@ -50,7 +50,7 @@ class Key
      * @return Byte
      * @throws \Exception
      */
-    private function createPublicKey(Byte $privateKey): Byte
+    private static function createPublicKey(Byte $privateKey): Byte
     {
         $context = \secp256k1_context_create(SECP256K1_CONTEXT_SIGN | SECP256K1_CONTEXT_VERIFY);
         /** @var resource $publicKey */
