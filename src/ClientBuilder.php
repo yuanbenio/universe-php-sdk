@@ -59,7 +59,7 @@ class ClientBuilder
             }
             $this->httpOptions['base_uri'] = $config['base_uri'] . '/' . self::SERVER_VERSION . "/";
         } else {
-            $this->httpOptions['base_uri'] = $this->httpOptions['base_uri'] . '/' . self::SERVER_VERSION . "/";
+            $this->httpOptions['base_uri'] .= '/' . self::SERVER_VERSION . "/";
         }
 
         if (isset($config['timeout'])) {
@@ -79,25 +79,19 @@ class ClientBuilder
      */
     public function publishMetadata(array $metadata)
     {
-        $response = $this->client->post('metadata', [
+        return $this->client->post('metadata', [
             'body' => json_encode($metadata),
         ]);
-
-        return $response;
     }
 
     public function searchMetadata(string $dna)
     {
-        $response = $this->client->get('metadata/' . $dna);
-
-        return $response;
+        return $this->client->get('metadata/' . $dna);
     }
 
     public function searchLatestBlock()
     {
-        $response = $this->client->get('block_hash');
-
-        return $response;
+        return $this->client->get('block_hash');
     }
 
     public function registerAccount(array $subkeys)
@@ -109,10 +103,8 @@ class ClientBuilder
         ];
         $metadata = $this->setSignature($metadata, $signature);
 
-        $response = $this->client->post('accounts', [
+        return $this->client->post('accounts', [
             'body' => json_encode($metadata),
         ]);
-
-        return $response;
     }
 }

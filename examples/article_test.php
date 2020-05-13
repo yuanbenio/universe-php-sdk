@@ -60,7 +60,7 @@ $metadata = $client->buildMetadata($data);
 
 $signature = $client->sign($metadata);
 
-echo "signature : ".$signature . PHP_EOL;
+echo "signature : " . $signature . PHP_EOL;
 
 /*
  * you can use signature to generate dna
@@ -70,20 +70,22 @@ echo "signature : ".$signature . PHP_EOL;
 $metadata = $client->setSignature($metadata, $signature);
 
 $response = $client->publishMetadata($metadata);
-
-echo "result : " . $response->getBody()->getContents() . PHP_EOL;
+$content = $response->getBody()->getContents();
+echo "result : " . $content . PHP_EOL;
 
 /*
  * result : {"code":"ok","data":{"dna":"1AGK96C7JR6CC69JUKG0ZJLCSFODZ6GS9JNYSHKWWS3JZ7RJN5"}}
  */
+$resp = json_decode($content, true);
+if ($resp["code"] == "ok") {
 
-$dna = '1AGK96C7JR6CC69JUKG0ZJLCSFODZ6GS9JNYSHKWWS3JZ7RJN5';
+    $dna = $resp["data"]["dna"];
+    $responseMeta = $client->searchMetadata($dna);
+    echo "metadata info : " . $responseMeta->getBody()->getContents() . PHP_EOL;
 
-$responseMeta = $client->searchMetadata($dna);
-
-echo "metadata info : " . $responseMeta->getBody()->getContents() . PHP_EOL;
-
-/*
- metadata info : {"code":"ok","data":{"content_hash":"028a6011079dc3316f36198bdcc9476937ea2c3f9b705557c8e11be737b01107","created":"1555508743","block_hash":"627E5DEA02407894CA42EFE1267A9BC4F6770AB3","block_height":"323099","language":"en","signature":"af4123fb82d0ba48f99c604c3990e676f8b21266ad4c74b9632d6fd6519b16e41565453189ccfb7b390629f516eee53c40556620fcbc4b3989441f3606b11b4d00","pubkey":"02960bfff6ffd689b58c87e142e37a47ec348984dfdb79d6a069302cfac89d4368","type":"article","license":{"type":"none"},"category":"news","dna":"1AGK96C7JR6CC69JUKG0ZJLCSFODZ6GS9JNYSHKWWS3JZ7RJN5","title":"test ybl article"},"tx":{"block_hash":"32137a2f4f5d24870caeb535724cf946230f1243","block_height":323101,"sender":"1624de6420e15aee7543c19a01a12ab135416bedc6b77d86ceb373c1bb51785f192c2c8452","proposer":"","time":1555508726,"version":"v4"}}
- */
+    /*
+     * {"code":"3012","msg":"Query failure","data":{"license":{}},"tx":{"block_hash":"","block_height":0,"sender":"","proposer":"","time":0,"version":""}}
+     * If the code is 3012, wait a minute or so to check again until the code value is ok
+     */
+}
 
